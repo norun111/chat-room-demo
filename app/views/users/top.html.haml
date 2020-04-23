@@ -1,0 +1,12 @@
+- if user_signed_in?
+  =link_to "logout", destroy_user_session_path ,:method => :delete
+  %br/
+  = link_to "become-creator" ,new_creator_path
+  %br/
+  .creator-index
+    - @creators.each do |creator|
+      = link_to creator.name, creator_path(creator.id)
+- else
+  %h3 
+  = link_to "login", new_user_session_path
+  = link_to "signup", new_user_registration_path
