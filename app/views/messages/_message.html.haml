@@ -1,0 +1,10 @@
+.message
+  .kaiwa
+    - if message.user == current_user
+      - position = 'right'
+    - else
+      - position = 'left'
+    %figure{:class => "kaiwa-img-#{position}"}
+      %figcaption.kaiwa-img-description
+    %div{:class => "kaiwa-text-#{position}"}
+      = simple_format(message.content)
