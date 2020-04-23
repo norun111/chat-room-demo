@@ -3,4 +3,13 @@
 - unless current_user.creator
   with: 
   = @creator.name
-  
+%div#show_user{data: {show_user: current_user.id}}
+.col-md-12
+  .chat_box
+    %div#messages{data: {room_id: @room.id}}
+    = render @messages
+  %center
+    .input
+      = text_field nil, nil, 'data-behavior': 'room_speaker', class: 'center-block', style: 'margin-bottom: 20px; width: 100%; max-width: 500px;'
+      %br/
+      = button_tag 'submit', class: 'chat_submit'
