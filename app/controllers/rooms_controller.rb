@@ -2,7 +2,9 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id]) #ルーム情報の取得
     # @message = Message.new #新規メッセージ投稿
-    # @messages = @room.messages #このルームのメッセージを全て取得
+    if @room.messages
+      @messages = @room.messages
+    end #このルームのメッセージを全て取得
 
     unless current_user.creator
       if @room.user.id == current_user.id
