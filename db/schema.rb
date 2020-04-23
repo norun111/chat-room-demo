@@ -22,11 +22,15 @@ ActiveRecord::Schema.define(version: 2020_04_22_132919) do
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "room_id"
+    t.bigint "user_id"
+    t.bigint "creator_id"
     t.boolean "is_user"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_messages_on_creator_id"
     t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -52,7 +56,9 @@ ActiveRecord::Schema.define(version: 2020_04_22_132919) do
   end
 
   add_foreign_key "creators", "users"
+  add_foreign_key "messages", "creators"
   add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "rooms", "creators"
   add_foreign_key "rooms", "users"
 end
