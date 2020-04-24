@@ -14,6 +14,7 @@ class CreatorsController < ApplicationController
 
   def show
     @creator = Creator.find(params[:id])
+    @rooms = @creator.rooms
     unless current_user.creator
       rooms = current_user.rooms
       #自分が入ってるroomの相手のidを格納する
