@@ -1,7 +1,10 @@
 - unless current_user.creator
   - if @creator_ids.include?(@creator.id)
     = link_to "chat", room_path(current_user.rooms.find_by(creator_id: @creator.id))
+    
   -else
     = form_for Room.new do |f|
       = f.hidden_field :creator_id, :value => @creator.id
       = f.submit
+- else
+  
